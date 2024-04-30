@@ -1,27 +1,27 @@
 {
-  "name": "eml-parser",
-  "version": "2.0.3",
+  "name": "eml-parser-puppeteer",
+  "version": "1.0.0",
   "description": "Parse .eml and .msg files or convert to pdf, html, jpeg or png format. Extract headers and attachments from .eml and msg files.",
   "dependencies": {
     "@kenjiuno/decompressrtf": "^0.1.4",
     "@kenjiuno/msgreader": "^1.20.0-alpha.1",
     "document-highlighter": "^2.1.0",
-    "html-pdf": "^3.0.1",
+    "puppeteer": "^21.1.1",
     "iconv-lite": "^0.6.3",
     "mailparser": "^3.6.4",
     "rtf-stream-parser": "^3.6.0"
   },
-  "homepage": "https://github.com/ankit1329/Eml-Parser",
+  "homepage": "https://github.com/nshiddqui/eml-parser-puppeteer",
   "bugs": {
-    "url": "https://github.com/ankit1329/Eml-Parser/issues",
-    "email": "akhouriankitprakash@gmail.com"
+    "url": "https://github.com/nshiddqui/eml-parser-puppeteer/issues",
+    "email": "nazim27294@gmail.com"
   },
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ankit1329/Eml-Parser.git"
+    "url": "https://github.com/nshiddqui/eml-parser-puppeteer.git"
   },
-  "author": "Ankit <akhouriankitprakash@gmail.com> (https://www.linkedin.com/in/ankit1329)",
+  "author": "Nazim <nazim27294@gmail.com> (https://www.linkedin.com/in/nazim-khurshid)",
   "license": "MIT",
   "private": false,
   "keywords": [

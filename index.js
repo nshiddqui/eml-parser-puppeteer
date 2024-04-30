@@ -1,5 +1,5 @@
 const simpleParser = require('mailparser').simpleParser;
-const pdf = require('html-pdf');
+const puppeteer = require('puppeteer');
 const MsgReader = require('@kenjiuno/msgreader').default
 const decompressRTF = require('@kenjiuno/decompressrtf').decompressRTF;
 const iconv = require("iconv-lite");
@@ -241,7 +241,7 @@ module.exports = EmlParser = function (fileReadStream) {
     }
 
     this.convertEmailToStream = (type, orientation, format, outerOptions) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let options = {
                 orientation: orientation || 'landscape' // potrait | landscape
             };
@@ -251,14 +251,16 @@ module.exports = EmlParser = function (fileReadStream) {
             if (format) {
                 options.format = format // A3, A4, A5, Legal, Letter, Tabloid
             }
+
+            const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
+
+            const page = await browser.newPage();
+
             this.getEmailAsHtml(outerOptions)
-                .then(html => {
-                    pdf.create(html, options).toStream(function (err, res) {
-                        if (err) {
-                            reject(err);
-                        }
-                        resolve(res);
-                    });
+                .then(async (html) => {
+                    await page.setContent(html);
+                    const pdf = await page.pdf(options);
+                    resolve(pdf);
                 })
                 .catch(err => {
                     reject(err);
@@ -267,7 +269,7 @@ module.exports = EmlParser = function (fileReadStream) {
     }
 
     this.convertMessageToStream = (type, orientation, format, outerOptions) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let options = {
                 orientation: orientation || 'landscape' // potrait | landscape
             };
@@ -277,14 +279,14 @@ module.exports = EmlParser = function (fileReadStream) {
             if (format) {
                 options.format = format // A3, A4, A5, Legal, Letter, Tabloid
             }
+            const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
+
+            const page = await browser.newPage();
             this.getMessageAsHtml(outerOptions)
-                .then(html => {
-                    pdf.create(html, options).toStream(function (err, res) {
-                        if (err) {
-                            reject(err);
-                        }
-                        resolve(res);
-                    });
+                .then(async (html) => {
+                    await page.setContent(html);
+                    const pdf = await page.pdf(options);
+                    resolve(pdf);
                 })
                 .catch(err => {
                     reject(err);
@@ -293,7 +295,7 @@ module.exports = EmlParser = function (fileReadStream) {
     }
 
     this.convertEmailToBuffer = (type, orientation, format, outerOptions) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let options = {
                 orientation: orientation || 'landscape'  // potrait | landscape
             };
@@ -303,14 +305,16 @@ module.exports = EmlParser = function (fileReadStream) {
             if (format) {
                 options.format = format // A3, A4, A5, Legal, Letter, Tabloid
             }
+
+            const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
+
+            const page = await browser.newPage();
+
             this.getEmailAsHtml(outerOptions)
-                .then(html => {
-                    pdf.create(html, options).toBuffer(function (err, res) {
-                        if (err) {
-                            reject(err);
-                        }
-                        resolve(res);
-                    });
+                .then(async (html) => {
+                    await page.setContent(html);
+                    const pdf = await page.pdf(options);
+                    resolve(pdf);
                 })
                 .catch(err => {
                     reject(err);
@@ -319,7 +323,7 @@ module.exports = EmlParser = function (fileReadStream) {
     }
 
     this.convertMessageToBuffer = (type, orientation, format, outerOptions) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let options = {
                 orientation: orientation || 'landscape'  // potrait | landscape
             };
@@ -329,14 +333,16 @@ module.exports = EmlParser = function (fileReadStream) {
             if (format) {
                 options.format = format // A3, A4, A5, Legal, Letter, Tabloid
             }
+
+            const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
+
+            const page = await browser.newPage();
+
             this.getMessageAsHtml(outerOptions)
-                .then(html => {
-                    pdf.create(html, options).toBuffer(function (err, res) {
-                        if (err) {
-                            reject(err);
-                        }
-                        resolve(res);
-                    });
+                .then(async (html) => {
+                    await page.setContent(html);
+                    const pdf = await page.pdf(options);
+                    resolve(pdf);
                 })
                 .catch(err => {
                     reject(err);
