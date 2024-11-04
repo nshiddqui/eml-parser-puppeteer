@@ -7,6 +7,10 @@ const rtfParser = require("rtf-stream-parser");
 
 const isStringsArray = arr => arr.every(i => typeof i === "string");
 
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
 function stream2buffer(stream) {
 
     return new Promise((resolve, reject) => {
@@ -253,7 +257,7 @@ module.exports = EmlParser = function (fileReadStream) {
             }
 
             const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
-
+            await sleep(1000);
             const page = await browser.newPage();
 
             this.getEmailAsHtml(outerOptions)
@@ -280,7 +284,8 @@ module.exports = EmlParser = function (fileReadStream) {
                 options.format = format // A3, A4, A5, Legal, Letter, Tabloid
             }
             const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
-
+            await sleep(1000);
+            
             const page = await browser.newPage();
             this.getMessageAsHtml(outerOptions)
                 .then(async (html) => {
@@ -307,7 +312,8 @@ module.exports = EmlParser = function (fileReadStream) {
             }
 
             const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
-
+            await sleep(1000);
+            
             const page = await browser.newPage();
 
             this.getEmailAsHtml(outerOptions)
@@ -335,7 +341,8 @@ module.exports = EmlParser = function (fileReadStream) {
             }
 
             const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'], });
-
+            await sleep(1000);
+            
             const page = await browser.newPage();
 
             this.getMessageAsHtml(outerOptions)
